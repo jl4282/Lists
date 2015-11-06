@@ -20,4 +20,22 @@ router.post('/create', function(req, res, next) {
   });
 });
 
+router.post('/check', function(req, res, next) {
+  List.findOne({slug:req.body.slug}, function(err, list, count) {
+    if (req.body.checked instanceof Array){
+      req.body.checked.forEach(function(index){
+        list.items[index].checked = true;
+      });
+    }
+    else{
+      list.items[req.body.checked].checked = true;
+    }
+    list.markModified('toppings');
+    list.save(function(err, modifiedList, count) {
+      console.log(err, modifiedList);
+      res.redirect('../list/' + list.slug);
+    });
+  });
+});
+
 module.exports = router;

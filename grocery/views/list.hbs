@@ -1,15 +1,18 @@
 <h1>Shoppy Shoperson</h1>
 <p>{{list.name}}, by {{list.createdBy}}</p>
-
-<form method="POST" action="../item/create">
+<form method="POST" action="../item/check">
   {{#if list.items}}
     <ul>
       {{#each list.items}}
-        <li>{{this.name}}</li>
+        <li {{#if this.checked}}class="checked"{{/if}}>{{#unless this.checked}}<input type="checkbox" name="checked" value="{{@index}}"> {{/unless}}{{this.quantity}} X {{this.name}}</li>
       {{/each}}
     </ul>
+    <input type="hidden" name="slug" value="{{list.slug}}">
+    <button type="submit">Check off</button>
   {{/if}}
+</form>
 
+<form method="POST" action="../item/create">
   Quantity: <input type="number" name="quantity">
   Name: <input type="text" name="name">
   <input type="hidden" name="slug" value="{{list.slug}}">
