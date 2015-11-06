@@ -1,0 +1,18 @@
+<h1>Shoppy Shoperson</h1>
+<p>{{list.name}}, by {{list.createdBy}}</p>
+
+<form method="POST" action="../item/create">
+  {{#if list.items}}
+    <ul>
+      {{#each list.items}}
+        <li>{{this.name}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  Quantity: <input type="number" name="quantity">
+  Name: <input type="text" name="name">
+  <input type="hidden" name="slug" value="{{list.slug}}">
+  <button type="submit">Submit</button>
+
+</form>

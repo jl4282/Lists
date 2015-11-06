@@ -1,2 +1,8 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>Shoppy Shoperson</h1>
+{{#if lists}}
+  <ul>
+    {{#each lists}}
+      <li><a href="/list/{{this.slug}}">{{this.name}}</a></li>
+    {{/each}}
+  </ul>
+{{/if}}
