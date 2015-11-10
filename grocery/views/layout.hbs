@@ -5,12 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <h1>Shoppy Shoperson</h1>
     {{#if user}}
-      <h1>Hello {{user.username}}</h1>
+      <p>Hello {{user.username}} (<a href="/logout">Logout</a>)</p>
     {{/if}}
-    {{{body}}}
+    <div class="content">
+      {{{body}}}
+    </div>
     {{#if user}}
-    <a href="/lists/create">Create List</a> | <a href="/lists">All Lists</a> | <a href="/logout">Logout</a>
+    <a href="/lists/create">Create List</a> | <a href="/lists">All Lists</a>
     {{else}}
     <a href="/register">Register</a>
     <a href="/login">Login</a>

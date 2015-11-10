@@ -21,20 +21,25 @@ router.post('/create', function(req, res, next) {
 });
 
 router.post('/check', function(req, res, next) {
-  List.findOne({slug:req.body.slug}, function(err, list, count) {
-    if (req.body.checked instanceof Array){
-      req.body.checked.forEach(function(index){
-        list.items[index].checked = true;
+  if (req.body.checked){ //make sure something is there
+    List.findOne({slug:req.body.slug}, function(err, list, count) {
+      if (req.body.checked instanceof Array){
+        req.body.checked.forEach(function(index){
+          list.items[index].checked = true;
+        });
+      }
+      else{
+        list.items[req.body.checked].checked = true;
+      }
+      list.markModified('toppings');
+      list.save(function(err, modifiedList, count) {
+        res.redirect('../lists/' + list.slug);
       });
-    }
-    else{
-      list.items[req.body.checked].checked = true;
-    }
-    list.markModified('toppings');
-    list.save(function(err, modifiedList, count) {
-      res.redirect('../lists/' + list.slug);
     });
-  });
+  }
+  else {
+    res.redirect('../lists/' + req.body.slug);
+  }
 });
 
 module.exports = router;
