@@ -12,7 +12,7 @@ router.post('/create', function(req, res, next) {
     {$push: {items: {name: req.body.name, quantity: req.body.quantity, checked: false}}},
     function(err, list, count) {
       if (!err){
-        res.redirect('../list/' + list.slug);
+        res.redirect('../lists/' + list.slug);
       }
       else {
         console.log('Error updating list');
@@ -32,8 +32,7 @@ router.post('/check', function(req, res, next) {
     }
     list.markModified('toppings');
     list.save(function(err, modifiedList, count) {
-      console.log(err, modifiedList);
-      res.redirect('../list/' + list.slug);
+      res.redirect('../lists/' + list.slug);
     });
   });
 });

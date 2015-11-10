@@ -5,8 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    {{#if user}}
+      <h1>Hello {{user.username}}</h1>
+    {{/if}}
     {{{body}}}
-    <a href="/list/create">Create List</a>
-    <a href="/list">All Lists</a>
+    {{#if user}}
+    <a href="/lists/create">Create List</a> | <a href="/lists">All Lists</a> | <a href="/logout">Logout</a>
+    {{else}}
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+    {{/if}}
   </body>
 </html>
